@@ -1,0 +1,104 @@
+@charset "ISO-8859-1";
+
+/* Reset some default browser styles */
+body, ul {
+	margin: 0;
+	padding: 0;
+}
+
+/* Basic styling for the sidebar */
+.sidebar {
+	background-color: #333;
+	color: white;
+	width: 200px;
+	height: 100%;
+	position: fixed;
+	transition: width 0.3s;
+	/* Add smooth transition for mobile responsiveness */
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+
+.sidebar li {
+	padding: 10px;
+}
+
+.sidebar a {
+	text-decoration: none;
+	color: white;
+	display: block; /* Make the entire list item clickable */
+}
+
+/* Add a hover effect for sidebar headings */
+.sidebar a:hover {
+/* 	background-color: rgb(128, 128, 128); */
+	color: lime;
+	text-decoration: none;
+	padding-left:10px;
+	font-size: 20px;
+}
+
+/* Style the content area */
+.content {
+	margin-left: 200px;
+	padding: 20px;
+	transition: margin-left 0.3s;
+	background-color: lime;
+	/* Add smooth transition for mobile responsiveness */
+}
+.content-body{
+	margin-left: 200px;
+	padding: 20px;
+	height:auto;
+	width:auto;
+	transition: margin-left 0.3s;
+}
+
+/* Highlight the active link */
+.sidebar a.active {
+	font-weight: bold;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+	.sidebar {
+		width: 80px;
+	}
+	.content {
+		margin-left: 80px;
+	}
+}
+
+.table-container {
+    width: 100%;
+    max-width: 800px; /* Set a maximum width for the container */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    border: 1px solid #ddd;
+    margin: 20px auto;
+}
+
+table {
+    width: auto; /* Let the table be as wide as its content */
+    table-layout: fixed; /* Prevent table from expanding to content width */
+}
+
+/* Style the scroll buttons */
+.scroll-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.scroll-left-button,
+.scroll-right-button {
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Hide horizontal scrollbar */
+.table-container::-webkit-scrollbar {
+    display: none;
+}

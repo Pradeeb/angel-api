@@ -1,0 +1,24 @@
+body {
+	background-color: #f0f0f0; /* Set your desired background color here */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.container {
+	background-color: #ffffff;
+	/* Set your form container background color */
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.btn-login {
+	text-align: center;
+}

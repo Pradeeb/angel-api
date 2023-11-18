@@ -1,0 +1,86 @@
+@charset "ISO-8859-1";
+
+/* Reset some default browser styles */
+body, ul {
+	margin: 0;
+	padding: 0;
+}
+
+/* Basic styling for the sidebar */
+.sidebar {
+	background-color: #333;
+	color: white;
+	width: 200px;
+	height: 100%;
+	position: fixed;
+	transition: width 0.3s;
+	/* Add smooth transition for mobile responsiveness */
+}
+
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+
+.sidebar li {
+	padding: 10px;
+}
+
+.sidebar a {
+	text-decoration: none;
+	color: white;
+	display: block; /* Make the entire list item clickable */
+}
+
+/* Add a hover effect for sidebar headings */
+.sidebar a:hover {
+	/* 	background-color: rgb(128, 128, 128); */
+	color: lime;
+	text-decoration: none;
+	padding-left: 10px;
+	font-size: 20px;
+}
+
+/* Style the content area */
+.content {
+	margin-left: 200px;
+	padding: 20px;
+	transition: margin-left 0.3s;
+	background-color: lime;
+	/* Add smooth transition for mobile responsiveness */
+}
+
+.content-body {
+	margin-left: 200px;
+	padding: 20px;
+	height: auto;
+	width: auto;
+	transition: margin-left 0.3s;
+}
+
+/* Highlight the active link */
+.sidebar a.active {
+	font-weight: bold;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+	.sidebar {
+		width: 80px;
+	}
+	.content {
+		margin-left: 80px;
+	}
+}
