@@ -4,7 +4,7 @@ public class LoginRequest {  //  LoginRequest
 	
 	private String clientcode;
 	private String password;
-	private int totp;
+	private String totp;
 	
 	public String getClientcode() {
 		return clientcode;
@@ -18,14 +18,14 @@ public class LoginRequest {  //  LoginRequest
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getTotp() {
+	public String getTotp() {
 		return totp;
 	}
-	public void setTotp(int totp) {
+	public void setTotp(String totp) {
 		this.totp = totp;
 	}
 	
-	public LoginRequest(String clientcode, String password, int totp) {
+	public LoginRequest(String clientcode, String password, String totp) {
 		super();
 		this.clientcode = clientcode;
 		this.password = password;

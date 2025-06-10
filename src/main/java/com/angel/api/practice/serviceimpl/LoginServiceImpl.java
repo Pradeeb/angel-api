@@ -3,7 +3,7 @@ package com.angel.api.practice.serviceimpl;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.angel.api.practice.errorhandle.ApiResponse;
@@ -13,6 +13,8 @@ import com.angel.api.practice.model.LoginToken;
 import com.angel.api.practice.repository.ILoginStatusRepository;
 import com.angel.api.practice.repository.ILoginTokenRepository;
 import com.angel.api.practice.service.ILoginService;
+import com.angelbroking.smartapi.SmartConnect;
+import com.angelbroking.smartapi.models.User;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,11 +33,13 @@ public class LoginServiceImpl implements ILoginService {
 	@Autowired
 	ILoginStatusRepository loginStatusRepository;
 	
+    @Value("${api.key}")
+    private String apiKey;
+    
     private static String jwtToken=null;
     private static String refreshToken=null;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public ApiResponse login(LoginRequest login) {
 		 LoginToken loginToken = new LoginToken();
@@ -49,55 +53,29 @@ public class LoginServiceImpl implements ILoginService {
               
             RequestBody body = RequestBody.create(mediaType, requestBodyJson);
             
-            Request request = new Request.Builder().url("https://apiconnect.angelbroking.com/rest/auth/angelbroking/user/v1/loginByPassword")
-                    .method("POST", body)
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Accept", "application/json")
-                    .addHeader("X-UserType", "USER")
-                    .addHeader("X-SourceID", "WEB")
-                    .addHeader("X-ClientLocalIP", "CLIENT_LOCAL_IP")
-                    .addHeader("X-ClientPublicIP", "CLIENT_PUBLIC_IP")
-                    .addHeader("X-MACAddress", "MAC_ADDRESS")
-                    .addHeader("X-PrivateKey", "RCvbyZRP")
-                    .build();
+            SmartConnect connect=new SmartConnect();
+            connect.setApiKey(apiKey);
+            User user = connect.generateSession(login.getClientcode().toString(), login.getPassword().toString(), login.getTotp().toString());
 
-            Response response = client.newCall(request).execute();
+            if (user != null) {
 
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-
-             // Parse the JSON response body
-                JsonNode responseJson = objectMapper.readTree(responseBody);
 
                 // Extract status, errorcode, and message
-                loginStatus.setStatus(responseJson.get("status").asBoolean());
-                loginStatus.setErrorCode( responseJson.get("errorcode").asText());
-                loginStatus.setMessage(responseJson.get("message").asText());
+                loginStatus.setStatus(user != null);
+                loginStatus.setErrorCode("200");
+                loginStatus.setMessage("Login successful");
                 loginToken.setLoginStatus(loginStatus);
                 // Get the "data" object
-                JsonNode dataNode = responseJson.get("data");
-                
-                if(!dataNode.isEmpty()) {
-                    // Create a LoginToken object and map data from dataNode
-                    
-                    loginToken.setJwtToken(dataNode.get("jwtToken").asText());
-                    loginToken.setRefreshToken(dataNode.get("refreshToken").asText());
-                    loginToken.setFeedToken(dataNode.get("feedToken").asText());
-                    
-                    jwtToken=dataNode.get("jwtToken").asText();
-                    refreshToken=dataNode.get("refreshToken").asText();
-                    
-                    // Print the jwtToken
-                    System.out.println("jwtToken: " + jwtToken);
-                refreshToken = dataNode.get("refreshToken").asText();
-                }
+                loginToken.setJwtToken(user.getAccessToken());
+                loginToken.setRefreshToken(user.getRefreshToken());
+                loginToken.setFeedToken(user.getFeedToken());
                 
              // Save the LoginToken object to the repository
                 loginTokenRepository.save(loginToken);
 
-                return new ApiResponse(true, false, responseJson);
+                return new ApiResponse(user != null, user == null, user);
             } else {
-                return new ApiResponse(false, false, "Request failed with response code: " + response.code());
+                return new ApiResponse(user != null, user == null, "Request failed with response code: " +"401");
             }
         } catch (IOException e) {
             e.printStackTrace();

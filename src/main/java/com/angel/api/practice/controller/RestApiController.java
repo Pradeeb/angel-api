@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.angel.api.practice.errorhandle.ApiResponse;
 import com.angel.api.practice.model.LoginRequest;
 import com.angel.api.practice.service.ILoginService;
+import com.angel.api.practice.service.IStockDetails;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -15,6 +16,10 @@ public class RestApiController {
 
 	@Autowired
 	private ILoginService loginService;
+	
+
+	@Autowired
+	private IStockDetails stockDetails;
 
 	@ResponseBody
 	@PostMapping(path = "/login", produces = "application/json", consumes = "application/json")
@@ -40,5 +45,19 @@ public class RestApiController {
 		ApiResponse userProfile = loginService.userProfile();
 		return userProfile;
 	}
+	
+	@ResponseBody
+	@GetMapping(path = "/getallholding")
+	public ApiResponse getAllHolding(@RequestHeader("Authorization") String authorizationHeader) throws IOException {
+		ApiResponse userProfile = stockDetails.getAllHolgingStokDetails(authorizationHeader);
+		return userProfile;
+	}
 
+	@ResponseBody
+	@GetMapping(path = "/getholding")
+	public ApiResponse getHolding(@RequestHeader("Authorization") String authorizationHeader) throws IOException {
+		ApiResponse userProfile = stockDetails.getHolgingStokDetails(authorizationHeader);
+		return userProfile;
+	}
+	
 }
