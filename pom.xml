@@ -72,38 +72,43 @@
 			<artifactId>smartapi-java</artifactId>
 			<version>2.2.6</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230227</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>smart-api</id>
-						<phase>clean</phase>
-						<configuration>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.angelone</groupId>
-							<artifactId>smartapi-java</artifactId>
-							<version>2.2.6</version>
-							<file>
-								${project.basedir}/lib/smartapi-java.jar</file>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-install-plugin</artifactId>
+										<versionRange>[2.5.2,)</versionRange>
+										<goals>
+											<goal>install-file</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>

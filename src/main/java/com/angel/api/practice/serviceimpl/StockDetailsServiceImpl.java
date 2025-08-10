@@ -23,17 +23,9 @@ public class StockDetailsServiceImpl implements IStockDetails {
         SmartConnect connect=new SmartConnect();
         connect.setApiKey(apiKey);
         connect.setAccessToken(token);
-        try {
-			JSONObject stockDetails = connect.getAllHolding();
-			Map<String, Object> dataMap = stockDetails.toMap();
-			return new ApiResponse(true, false, dataMap);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return new ApiResponse(false, true, e.getMessage());
-		} catch (SmartAPIException e) {
-			e.printStackTrace();
-			return new ApiResponse(false, true, e.getMessage());
-		}
+//			Map<String, Object> dataMap = stockDetails.toMap();
+//			return new ApiResponse(true, false, dataMap);
+        	return null;
 	}
 
 	@Override

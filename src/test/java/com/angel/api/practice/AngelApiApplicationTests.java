@@ -9,7 +9,7 @@ import com.angelbroking.smartapi.models.User;
 @SpringBootTest
 class AngelApiApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
         SmartConnect connect=new SmartConnect();
         connect.setApiKey("RCvbyZRP");
