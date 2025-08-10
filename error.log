@@ -1206,3 +1206,21 @@ java.lang.NullPointerException: Cannot invoke "String.toString()" because the re
 2025-06-16 13:55:05.349 [http-nio-8080-exec-2] ERROR c.angelbroking.smartapi.SmartConnect - JSONObject["data"] is not a JSONObject (class org.json.JSONObject$Null : null).
 2025-06-16 14:18:07.051 [http-nio-8080-exec-7] ERROR c.angelbroking.smartapi.SmartConnect - JSONObject["data"] is not a JSONObject (class org.json.JSONObject$Null : null).
 2025-06-16 14:23:37.252 [http-nio-8080-exec-1] ERROR c.angelbroking.smartapi.SmartConnect - JSONObject["data"] is not a JSONObject (class org.json.JSONObject$Null : null).
+2025-06-19 11:48:49.636 [http-nio-8080-exec-1] ERROR c.a.s.http.SmartAPIRequestHandler - checkip.amazonaws.com
+2025-06-19 11:48:49.686 [http-nio-8080-exec-1] ERROR c.a.s.http.SmartAPIRequestHandler - checkip.amazonaws.com
+2025-06-19 11:48:49.690 [http-nio-8080-exec-1] ERROR c.a.s.http.SmartAPIRequestHandler - exception createPostRequest
+2025-06-19 11:48:49.705 [http-nio-8080-exec-1] ERROR c.a.s.http.SmartAPIRequestHandler - Cannot invoke "org.json.JSONObject.getString(String)" because "this.apiheader" is null
+2025-06-19 11:48:49.705 [http-nio-8080-exec-1] ERROR c.angelbroking.smartapi.SmartConnect - Cannot invoke "okhttp3.Request.headers()" because "request" is null
+2025-06-19 12:42:45.456 [http-nio-8080-exec-2] ERROR c.a.s.http.SmartAPIRequestHandler - Error in GET request. Request URL: https://apiconnect.angelone.in/rest/secure/angelbroking/portfolio/v1/getAllHolding, Request Headers: User-Agent: javasmartapiconnect/3.0.0
+Authorization: ██
+Content-Type: application/json
+X-ClientLocalIP: 192.168.10.55
+X-ClientPublicIP: 49.207.182.122
+X-MACAddress: 18-C0-4D-3A-D4-5C
+Accept: application/json
+X-PrivateKey: RCvbyZRP
+X-UserType: USER
+X-SourceID: WEB
+,Response : {"success":false,"message":"Invalid Token","errorCode":"AG8001","data":""}
+2025-06-19 12:42:45.457 [http-nio-8080-exec-2] ERROR c.angelbroking.smartapi.SmartConnect - SmartAPIException occurred  while getting all holdings SmartAPIException [message=Unauthorized access. Please provide a valid or non-expired jwtToken., code=AG8001]
+2025-08-10 12:51:12.526 [main] ERROR c.angelbroking.smartapi.SmartConnect - Value null at data of type org.json.JSONObject$1 cannot be converted to JSONObject
